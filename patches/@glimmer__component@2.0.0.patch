@@ -1,0 +1,26 @@
+diff --git a/dist/index.js b/dist/index.js
+index ff3962713fed47731dd3a6cda41739163535b426..5e44d2e3a41fd7012471b79c3c6f3825767ff8db 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -282,7 +282,7 @@ function scheduledDestroyComponent(component) {
+  * 1. Properly destroy the component's associated `meta` data structure
+  * 2. Schedule destruction using Ember's runloop
+  */
+-class EmberGlimmerComponentManager extends BaseComponentManager {
++export class EmberGlimmerComponentManager extends BaseComponentManager {
+   capabilities = CAPABILITIES;
+   destroyComponent(component) {
+     if (component.isDestroying) {
+diff --git a/src/index.ts b/src/index.ts
+index ad7f4a6edf2918d93fecd9c9432de46c74f294a6..1c084f52051a138f32e4c6d79845a2a9efdfcae6 100644
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -3,6 +3,8 @@ import { setComponentManager } from '@ember/component';
+ import GlimmerComponentManager from './-private/ember-component-manager';
+ import _GlimmerComponent, { type Args } from './-private/component';
+ import { setOwner, type default as Owner } from '@ember/owner';
++export GlimmerComponentManager from './-private/ember-component-manager';
++
+ 
+ /**
+   A component is a reusable UI element that consists of a `.hbs` template and an

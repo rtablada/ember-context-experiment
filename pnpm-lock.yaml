@@ -4,6 +4,21 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@glimmer/manager': 0.94.10
+  '@glimmer/component': 2.0.0
+
+patchedDependencies:
+  '@glimmer/component@2.0.0':
+    hash: xqvu56wd6qsatmrn2ioutaclw4
+    path: patches/@glimmer__component@2.0.0.patch
+  '@glimmer/manager@0.94.10':
+    hash: z2zxlcynma7us5fwea4rc3l6bi
+    path: patches/@glimmer__manager@0.94.10.patch
+  ember-source@6.8.1:
+    hash: maxpxsxjahhh4bvccxxmac3u2u
+    path: patches/ember-source@6.8.1.patch
+
 importers:
 
   .:
@@ -57,8 +72,8 @@ importers:
         specifier: ^9.37.0
         version: 9.39.1
       '@glimmer/component':
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: 2.0.0
+        version: 2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4)
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.1.0(@babel/core@7.28.5)(rollup@4.53.2)
@@ -85,13 +100,13 @@ importers:
         version: 8.2.0(@babel/core@7.28.5)
       ember-cli-deprecation-workflow:
         specifier: ^3.4.0
-        version: 3.4.0(ember-source@6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+        version: 3.4.0(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5))
       ember-data:
         specifier: ~5.6.0
         version: 5.6.0(@ember/test-helpers@5.4.1(@babel/core@7.28.5))(@ember/test-waiters@4.1.1)(qunit@2.24.2)
       ember-load-initializers:
         specifier: ^3.0.1
-        version: 3.0.1(ember-source@6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5))
+        version: 3.0.1(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5))
       ember-modifier:
         specifier: ^4.2.2
         version: 4.2.2(@babel/core@7.28.5)
@@ -106,7 +121,7 @@ importers:
         version: 13.1.1
       ember-source:
         specifier: ~6.8.0
-        version: 6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
+        version: 6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5)
       ember-template-lint:
         specifier: ^7.9.3
         version: 7.9.3
@@ -2850,7 +2865,7 @@ packages:
     resolution: {integrity: sha512-yGYa7HiXnJA/D0plnS7yCP/1qXGqMocuXi/iJih/QMSLgq3AEy8I5Qaz5re4HOUtpaMh0ZKmyejTD5tLfzhmvQ==}
     engines: {node: '>= 18.*'}
     peerDependencies:
-      '@glimmer/component': '>= 1.1.2'
+      '@glimmer/component': 2.0.0
 
   ember-template-lint@7.9.3:
     resolution: {integrity: sha512-iqC4rv/oVlXViGuf7hlOA/bC550ZqacZKAc8WvQV0ueeCtIYPkYYK+Tc7FwpM8qGx3jiwu/ZsTuNfPInI5pL7Q==}
@@ -7343,7 +7358,7 @@ snapshots:
       '@glimmer/util': 0.94.8
       '@glimmer/wire-format': 0.94.8
 
-  '@glimmer/component@2.0.0':
+  '@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4)':
     dependencies:
       '@embroider/addon-shim': 1.10.2
       '@glimmer/env': 0.1.7
@@ -7369,7 +7384,7 @@ snapshots:
       '@simple-dom/interface': 1.4.0
       type-fest: 4.41.0
 
-  '@glimmer/manager@0.94.10':
+  '@glimmer/manager@0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)':
     dependencies:
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
@@ -7390,7 +7405,7 @@ snapshots:
     dependencies:
       '@glimmer/encoder': 0.93.8
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10
+      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
       '@glimmer/util': 0.94.8
       '@glimmer/vm': 0.94.8
       '@glimmer/wire-format': 0.94.8
@@ -7400,7 +7415,7 @@ snapshots:
   '@glimmer/program@0.94.10':
     dependencies:
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10
+      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
       '@glimmer/opcode-compiler': 0.94.10
       '@glimmer/util': 0.94.8
       '@glimmer/vm': 0.94.8
@@ -7418,7 +7433,7 @@ snapshots:
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10
+      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
       '@glimmer/owner': 0.93.4
       '@glimmer/program': 0.94.10
       '@glimmer/reference': 0.94.9
@@ -9166,11 +9181,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-deprecation-workflow@3.4.0(ember-source@6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5)):
+  ember-cli-deprecation-workflow@3.4.0(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5)):
     dependencies:
       '@babel/core': 7.28.5
       ember-cli-babel: 8.2.0(@babel/core@7.28.5)
-      ember-source: 6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
+      ember-source: 6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -9436,9 +9451,9 @@ snapshots:
       - eslint
       - typescript
 
-  ember-load-initializers@3.0.1(ember-source@6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5)):
+  ember-load-initializers@3.0.1(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5)):
     dependencies:
-      ember-source: 6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5)
+      ember-source: 6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5)
 
   ember-modifier@4.2.2(@babel/core@7.28.5):
     dependencies:
@@ -9484,17 +9499,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-source@6.8.1(@glimmer/component@2.0.0)(rsvp@4.8.5):
+  ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4))(rsvp@4.8.5):
     dependencies:
       '@babel/core': 7.28.5
       '@ember/edition-utils': 1.2.0
       '@embroider/addon-shim': 1.10.2
       '@glimmer/compiler': 0.94.11
-      '@glimmer/component': 2.0.0
+      '@glimmer/component': 2.0.0(patch_hash=xqvu56wd6qsatmrn2ioutaclw4)
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10
+      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
       '@glimmer/node': 0.94.10
       '@glimmer/opcode-compiler': 0.94.10
       '@glimmer/owner': 0.93.4
