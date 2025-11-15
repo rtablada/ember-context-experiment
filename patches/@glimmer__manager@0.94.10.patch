@@ -1,0 +1,180 @@
+diff --git a/dist/dev/index.js b/dist/dev/index.js
+index de29a8a7dbe089fb04bc9153aba8ed8fb51adf6b..7e8572ccb3f25988c779bf9179b619853eec5342 100644
+--- a/dist/dev/index.js
++++ b/dist/dev/index.js
+@@ -26,7 +26,7 @@ if (DEBUG) {
+         // default Ember toStrings, replace the constructor portion of the toString
+         // with the class name. We check the length of the class name to prevent doing
+         // this when the value is minified.
+-        return "function" == typeof obj.constructor && (className = getFunctionName(obj.constructor)), 
++        return "function" == typeof obj.constructor && (className = getFunctionName(obj.constructor)),
+         "toString" in obj && obj.toString !== Object.prototype.toString && obj.toString !== Function.prototype.toString && (
+         // eslint-disable-next-line @typescript-eslint/no-base-to-string
+         name = obj.toString()), name && /<.*:ember\d+>/u.test(name) && className && "_" !== className[0] && className.length > 2 && "Class" !== className ? name.replace(/<.*:/u, `<${className}:`) : name || className;
+@@ -117,17 +117,17 @@ const argsProxyFor = (capturedArgs, type) => {
+     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+     return setCustomTagFor(namedProxy, ((_obj, key) => function(namedArgs, key) {
+         return track((() => {
+-            key in namedArgs && 
++            key in namedArgs &&
+             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+             valueForRef(namedArgs[key]);
+         }));
+     }(named, key))), setCustomTagFor(positionalProxy, ((_obj, key) => function(positionalArgs, key) {
+         return track((() => {
+-            "[]" === key && 
++            "[]" === key &&
+             // consume all of the tags in the positional array
+             positionalArgs.forEach(valueForRef);
+             const parsed = convertToInt(key);
+-            null !== parsed && parsed < positionalArgs.length && 
++            null !== parsed && parsed < positionalArgs.length &&
+             // consume the tag of the referenced index
+             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+             valueForRef(positionalArgs[parsed]);
+@@ -167,7 +167,7 @@ function hasCapability(capabilities, capability) {
+ 
+ function helperCapabilities(managerAPI, options = {}) {
+     if (debugAssert(// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- JS-only check
+-    "3.23" === managerAPI, (() => `Invalid helper manager compatibility specified; you specified ${managerAPI}, but only '3.23' is supported.`)), 
++    "3.23" === managerAPI, (() => `Invalid helper manager compatibility specified; you specified ${managerAPI}, but only '3.23' is supported.`)),
+     DEBUG && (!options.hasValue && !options.hasScheduledEffect || options.hasValue && options.hasScheduledEffect)) throw new Error("You must pass either the `hasValue` OR the `hasScheduledEffect` capability when defining a helper manager. Passing neither, or both, is not permitted.");
+     if (DEBUG && options.hasScheduledEffect) throw new Error("The `hasScheduledEffect` capability has not yet been implemented for helper managers. Please pass `hasValue` instead");
+     return buildCapabilities({
+@@ -196,7 +196,7 @@ class CustomHelperManager {
+         if (void 0 === delegate) {
+             let {factory: factory} = this;
+             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+-            if (delegate = factory(owner), DEBUG && !FROM_CAPABILITIES.has(delegate.capabilities)) 
++            if (delegate = factory(owner), DEBUG && !FROM_CAPABILITIES.has(delegate.capabilities))
+             // TODO: This error message should make sense in both Ember and Glimmer https://github.com/glimmerjs/glimmer-vm/issues/1200
+             throw new Error(`Custom helper managers must have a \`capabilities\` property that is the result of calling the \`capabilities('3.23')\` (imported via \`import { capabilities } from '@ember/helper';\`). Received: \`${JSON.stringify(delegate.capabilities)}\` for: \`${delegate}\``);
+             this.helperManagerDelegates.set(owner, delegate);
+@@ -220,7 +220,7 @@ class CustomHelperManager {
+             const args = argsProxyFor(capturedArgs, "helper"), bucket = manager.createHelper(definition, args);
+             if (hasValue(manager)) {
+                 let cache = createComputeRef((() => manager.getValue(bucket)), null, DEBUG && manager.getDebugName && manager.getDebugName(definition));
+-                return hasDestroyable(manager) && associateDestroyableChild(cache, manager.getDestroyable(bucket)), 
++                return hasDestroyable(manager) && associateDestroyableChild(cache, manager.getDestroyable(bucket)),
+                 cache;
+             }
+             if (hasDestroyable(manager)) {
+@@ -259,8 +259,8 @@ const COMPONENT_MANAGERS = new WeakMap, MODIFIER_MANAGERS = new WeakMap, HELPER_
+ function setManager(map, manager, obj) {
+     return DEBUG && (debugAssert(// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- JS-only check
+     null !== obj && ("object" == typeof obj || "function" == typeof obj), // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+-    `Attempted to set a manager on a non-object value. Managers can only be associated with objects or functions. Value was ${debugToString$1(obj)}`), 
+-    debugAssert(!map.has(obj), `Attempted to set the same type of manager multiple times on a value. You can only associate one manager of each type with a given value. Value was ${debugToString$1(obj)}`)), 
++    `Attempted to set a manager on a non-object value. Managers can only be associated with objects or functions. Value was ${debugToString$1(obj)}`),
++    debugAssert(!map.has(obj), `Attempted to set the same type of manager multiple times on a value. You can only associate one manager of each type with a given value. Value was ${debugToString$1(obj)}`)),
+     map.set(obj, manager), obj;
+ }
+ 
+@@ -284,7 +284,7 @@ function getInternalModifierManager(definition, isOptional) {
+     `Attempted to use a value as a modifier, but it was not an object or function. Modifier definitions must be objects or functions with an associated modifier manager. The value was: ${definition}`));
+     const manager = getManager(MODIFIER_MANAGERS, definition);
+     return void 0 === manager ? (DEBUG && debugAssert(isOptional, // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+-    `Attempted to load a modifier, but there wasn't a modifier manager associated with the definition. The definition was: ${debugToString$1(definition)}`), 
++    `Attempted to load a modifier, but there wasn't a modifier manager associated with the definition. The definition was: ${debugToString$1(definition)}`),
+     null) : manager;
+ }
+ 
+@@ -301,7 +301,7 @@ function getInternalHelperManager(definition, isOptional) {
+     let manager = getManager(HELPER_MANAGERS, definition);
+     // Functions are special-cased because functions are defined
+     // as the "default" helper, per: https://github.com/emberjs/rfcs/pull/756
+-        if (void 0 === manager && "function" == typeof definition && (manager = DEFAULT_MANAGER), 
++        if (void 0 === manager && "function" == typeof definition && (manager = DEFAULT_MANAGER),
+     manager) return manager;
+     if (!0 === isOptional) return null;
+     if (DEBUG) throw new Error(// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+@@ -319,7 +319,7 @@ function getInternalComponentManager(definition, isOptional) {
+     `Attempted to use a value as a component, but it was not an object or function. Component definitions must be objects or functions with an associated component manager. The value was: ${definition}`));
+     const manager = getManager(COMPONENT_MANAGERS, definition);
+     return void 0 === manager ? (debugAssert(isOptional, (() => // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+-    `Attempted to load a component, but there wasn't a component manager associated with the definition. The definition was: ${debugToString$1(definition)}`)), 
++    `Attempted to load a component, but there wasn't a component manager associated with the definition. The definition was: ${debugToString$1(definition)}`)),
+     null) : manager;
+ }
+ 
+@@ -406,7 +406,7 @@ class CustomComponentManager {
+         if (void 0 === delegate) {
+             let {factory: factory} = this;
+             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+-            if (delegate = factory(owner), DEBUG && !FROM_CAPABILITIES.has(delegate.capabilities)) 
++            if (delegate = factory(owner), DEBUG && !FROM_CAPABILITIES.has(delegate.capabilities))
+             // TODO: This error message should make sense in both Ember and Glimmer https://github.com/glimmerjs/glimmer-vm/issues/1200
+             throw new Error(`Custom component managers must have a \`capabilities\` property that is the result of calling the \`capabilities('3.13')\` (imported via \`import { capabilities } from '@ember/component';\`). Received: \`${JSON.stringify(delegate.capabilities)}\` for: \`${delegate}\``);
+             componentManagerDelegates.set(owner, delegate);
+@@ -414,8 +414,8 @@ class CustomComponentManager {
+         return delegate;
+     }
+     create(owner, definition, vmArgs) {
+-        let delegate = this.getDelegateFor(owner), args = argsProxyFor(vmArgs.capture(), "component"), component = delegate.createComponent(definition, args);
+-        return new CustomComponentState(component, delegate, args);
++        let delegate = this.getDelegateFor(owner), args = argsProxyFor(vmArgs.capture(), "component"), component = delegate.createComponent(definition, args, vmArgs.stack);
++        return new CustomComponentState(component, delegate, args, vmArgs.stack);
+     }
+     getDebugName(definition) {
+         // eslint-disable-next-line @typescript-eslint/no-base-to-string
+@@ -447,7 +447,7 @@ class CustomComponentManager {
+             return delegate.capabilities.destructor;
+         }(delegate)) {
+             const {component: component} = bucket;
+-            return registerDestructor(bucket, (() => delegate.destroyComponent(component))), 
++            return registerDestructor(bucket, (() => delegate.destroyComponent(component))),
+             bucket;
+         }
+         return null;
+@@ -460,13 +460,13 @@ class CustomComponentManager {
+ /**
+  * Stores internal state about a component instance after it's been created.
+  */ class CustomComponentState {
+-    constructor(component, delegate, args) {
+-        this.component = component, this.delegate = delegate, this.args = args;
++    constructor(component, delegate, args, stack) {
++        this.component = component, this.delegate = delegate, this.args = args, this.stack = stack;
+     }
+ }
+ 
+ function modifierCapabilities(managerAPI, optionalFeatures = {}) {
+-    return debugAssert("3.22" === managerAPI, (() => `Invalid modifier manager compatibility specified; you specified ${managerAPI}, but only '3.22' is supported.`)), 
++    return debugAssert("3.22" === managerAPI, (() => `Invalid modifier manager compatibility specified; you specified ${managerAPI}, but only '3.22' is supported.`)),
+     buildCapabilities({
+         disableAutoTracking: Boolean(optionalFeatures.disableAutoTracking)
+     });
+@@ -504,7 +504,7 @@ function modifierCapabilities(managerAPI, optionalFeatures = {}) {
+         if (void 0 === delegate) {
+             let {factory: factory} = this;
+             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+-            if (delegate = factory(owner), DEBUG && !FROM_CAPABILITIES.has(delegate.capabilities)) 
++            if (delegate = factory(owner), DEBUG && !FROM_CAPABILITIES.has(delegate.capabilities))
+             // TODO: This error message should make sense in both Ember and Glimmer https://github.com/glimmerjs/glimmer-vm/issues/1200
+             throw new Error(`Custom modifier managers must have a \`capabilities\` property that is the result of calling the \`capabilities('3.22')\` (imported via \`import { capabilities } from '@ember/modifier';\`). Received: \`${JSON.stringify(delegate.capabilities)}\` for: \`${delegate}\``);
+             componentManagerDelegates.set(owner, delegate);
+@@ -519,7 +519,7 @@ function modifierCapabilities(managerAPI, optionalFeatures = {}) {
+             delegate: delegate,
+             args: args,
+             modifier: instance
+-        }, registerDestructor(state, (() => delegate.destroyModifier(instance, args))), 
++        }, registerDestructor(state, (() => delegate.destroyModifier(instance, args))),
+         state;
+     }
+     getDebugName(definition) {
+@@ -559,7 +559,7 @@ function setHelperManager(factory, obj) {
+ const TEMPLATES = new WeakMap, getPrototypeOf = Reflect.getPrototypeOf;
+ 
+ function setComponentTemplate(factory, obj) {
+-    if (DEBUG && (null === obj || "object" != typeof obj && "function" != typeof obj)) 
++    if (DEBUG && (null === obj || "object" != typeof obj && "function" != typeof obj))
+     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+     throw new Error(`Cannot call \`setComponentTemplate\` on \`${debugToString$1(obj)}\``);
+     if (DEBUG && TEMPLATES.has(obj)) throw new Error(// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- @fixme
+diff --git a/dist/prod/index.js b/dist/prod/index.js
+index 09f0aa17f819b89500b59e4aeeed4adf6a00f4d0..2aeebdaf94acf041d4cfac6c7c9d84923e699547 100644
+--- a/dist/prod/index.js
++++ b/dist/prod/index.js
+@@ -1,2 +1,2 @@
+-import{debugAssert as e}from"@glimmer/global-context";import{associateDestroyableChild as t,registerDestructor as n}from"@glimmer/destroyable";import{valueForRef as o,createComputeRef as r,createConstRef as a,UNDEFINED_REFERENCE as i}from"@glimmer/reference";import{track as l,createUpdatableTag as u,untrack as s}from"@glimmer/validator";import{InternalComponentCapabilities as c}from"@glimmer/vm";const f=new WeakMap;function d(e){return f.get(e)}function p(e,t){f.set(e,t)}function g(e){if("symbol"==typeof e)return null;const t=Number(e);return isNaN(t)?null:t%1==0?t:null}class m{constructor(e){this.named=e}get(e,t){const n=this.named[t];if(void 0!==n)return o(n)}has(e,t){return t in this.named}ownKeys(){return Object.keys(this.named)}isExtensible(){return!1}getOwnPropertyDescriptor(e,t){return{enumerable:!0,configurable:!0}}}class h{constructor(e){this.positional=e}get(e,t){let{positional:n}=this;if("length"===t)return n.length;const r=g(t);return null!==r&&r<n.length?o(n[r]):e[t]}isExtensible(){return!1}has(e,t){const n=g(t);return null!==n&&n<this.positional.length}}const y=e=>{const{named:t,positional:n}=e,r=new m(t),a=new h(n),i=Object.create(null),u=new Proxy(i,r),s=new Proxy([],a);return p(u,((e,n)=>function(e,t){return l((()=>{t in e&&o(e[t])}))}(t,n))),p(s,((e,t)=>function(e,t){return l((()=>{"[]"===t&&e.forEach(o);const n=g(t);null!==n&&n<e.length&&o(e[n])}))}(n,t))),{named:u,positional:s}},b=c.Empty;function w(e){return b|D(e,"dynamicLayout")|D(e,"dynamicTag")|D(e,"prepareArgs")|D(e,"createArgs")|D(e,"attributeHook")|D(e,"elementHook")|D(e,"dynamicScope")|D(e,"createCaller")|D(e,"updateHook")|D(e,"createInstance")|D(e,"wrapped")|D(e,"willDestroy")|D(e,"hasSubOwner")}function D(e,t){return e[t]?c[t]:b}function k(e,t,n){return!!(t&n)}function v(e,t){return!!(e&t)}function M(t,n={}){return e("3.23"===t,(()=>`Invalid helper manager compatibility specified; you specified ${t}, but only '3.23' is supported.`)),{hasValue:Boolean(n.hasValue),hasDestroyable:Boolean(n.hasDestroyable),hasScheduledEffect:Boolean(n.hasScheduledEffect)}}function C(e){return e.capabilities.hasValue}function H(e){return e.capabilities.hasDestroyable}class A{constructor(e){this.factory=e,this.helperManagerDelegates=new WeakMap,this.undefinedDelegate=null}getDelegateForOwner(e){let t=this.helperManagerDelegates.get(e);if(void 0===t){let{factory:n}=this;t=n(e),this.helperManagerDelegates.set(e,t)}return t}getDelegateFor(e){if(void 0===e){let{undefinedDelegate:e}=this;if(null===e){let{factory:t}=this;this.undefinedDelegate=e=t(void 0)}return e}return this.getDelegateForOwner(e)}getHelper(e){return(n,o)=>{let l=this.getDelegateFor(o);const u=y(n),s=l.createHelper(e,u);if(C(l)){let e=r((()=>l.getValue(s)),null,!1);return H(l)&&t(e,l.getDestroyable(s)),e}if(H(l)){let e=a(void 0,!1);return t(e,l.getDestroyable(s)),e}return i}}}class O{createHelper(e,t){return{fn:e,args:t}}getValue({fn:e,args:t}){return Object.keys(t.named).length>0?e(...t.positional,t.named):e(...t.positional)}getDebugName(e){return e.name?`(helper function ${e.name})`:"(anonymous helper function)"}constructor(){this.capabilities={hasValue:!0,hasDestroyable:!1,hasScheduledEffect:!1}}}const j=new WeakMap,S=new WeakMap,T=new WeakMap,F=Object.getPrototypeOf;function W(e,t,n){return e.set(n,t),n}function x(e,t){let n=t;for(;null!==n;){const t=e.get(n);if(void 0!==t)return t;n=F(n)}}function B(e,t){return W(S,e,t)}function E(e){const t=x(S,e);return void 0===t?null:t}function L(e,t){return W(T,e,t)}const N=new A((()=>new O));function V(t){e("object"==typeof t&&null!==t||"function"==typeof t,(()=>`Attempted to use a value as a helper, but it was not an object or function. Helper definitions must be objects or functions with an associated helper manager. The value was: ${t}`));let n=x(T,t);return void 0===n&&"function"==typeof t&&(n=N),n||null}function $(e,t){return W(j,e,t)}function I(t,n){e("object"==typeof t&&null!==t||"function"==typeof t,(()=>`Attempted to use a value as a component, but it was not an object or function. Component definitions must be objects or functions with an associated component manager. The value was: ${t}`));const o=x(j,t);return void 0===o?(e(n,(()=>`Attempted to load a component, but there wasn't a component manager associated with the definition. The definition was: ${(void 0)(t)}`)),null):o}function P(e){return void 0!==x(j,e)}function U(e){return function(e){return"function"==typeof e}(e)||void 0!==x(T,e)}function R(e){return void 0!==x(S,e)}const K={dynamicLayout:!1,dynamicTag:!1,prepareArgs:!1,createArgs:!0,attributeHook:!1,elementHook:!1,createCaller:!1,dynamicScope:!0,updateHook:!0,createInstance:!0,wrapped:!1,willDestroy:!1,hasSubOwner:!1};function q(e,t={}){let n=Boolean(t.updateHook);return{asyncLifeCycleCallbacks:Boolean(t.asyncLifecycleCallbacks),destructor:Boolean(t.destructor),updateHook:n}}function z(e){return e.capabilities.asyncLifeCycleCallbacks}function G(e){return e.capabilities.updateHook}class J{constructor(e){this.factory=e,this.componentManagerDelegates=new WeakMap}getDelegateFor(e){let{componentManagerDelegates:t}=this,n=t.get(e);if(void 0===n){let{factory:o}=this;n=o(e),t.set(e,n)}return n}create(e,t,n){let o=this.getDelegateFor(e),r=y(n.capture()),a=o.createComponent(t,r);return new Q(a,o,r)}getDebugName(e){return"function"==typeof e?e.name:e.toString()}update(e){let{delegate:t}=e;if(G(t)){let{component:n,args:o}=e;t.updateComponent(n,o)}}didCreate({component:e,delegate:t}){z(t)&&t.didCreateComponent(e)}didUpdate({component:e,delegate:t}){(function(e){return z(e)&&G(e)})(t)&&t.didUpdateComponent(e)}didRenderLayout(){}didUpdateLayout(){}getSelf({component:e,delegate:t}){return a(t.getContext(e),"this")}getDestroyable(e){const{delegate:t}=e;if(function(e){return e.capabilities.destructor}(t)){const{component:o}=e;return n(e,(()=>t.destroyComponent(o))),e}return null}getCapabilities(){return K}}class Q{constructor(e,t,n){this.component=e,this.delegate=t,this.args=n}}function X(t,n={}){return e("3.22"===t,(()=>`Invalid modifier manager compatibility specified; you specified ${t}, but only '3.22' is supported.`)),{disableAutoTracking:Boolean(n.disableAutoTracking)}}class Y{constructor(e){this.factory=e,this.componentManagerDelegates=new WeakMap}getDelegateFor(e){let{componentManagerDelegates:t}=this,n=t.get(e);if(void 0===n){let{factory:o}=this;n=o(e),t.set(e,n)}return n}create(e,t,o,r){let a,i=this.getDelegateFor(e),l=y(r),s=i.createModifier(o,l);return a={tag:u(),element:t,delegate:i,args:l,modifier:s},n(a,(()=>i.destroyModifier(s,l))),a}getDebugName(e){return"function"==typeof e?e.name||e.toString():"<unknown>"}getDebugInstance({modifier:e}){return e}getTag({tag:e}){return e}install({element:e,args:t,modifier:n,delegate:o}){let{capabilities:r}=o;r.disableAutoTracking?s((()=>o.installModifier(n,e,t))):o.installModifier(n,e,t)}update({args:e,modifier:t,delegate:n}){let{capabilities:o}=n;o.disableAutoTracking?s((()=>n.updateModifier(t,e))):n.updateModifier(t,e)}getDestroyable(e){return e}}function Z(e,t){return $(new J(e),t)}function _(e,t){return B(new Y(e),t)}function ee(e,t){return L(new A(e),t)}const te=new WeakMap,ne=Reflect.getPrototypeOf;function oe(e,t){return te.set(t,e),t}function re(e){let t=e;for(;null!==t;){let e=te.get(t);if(void 0!==e)return e;t=ne(t)}}export{J as CustomComponentManager,A as CustomHelperManager,Y as CustomModifierManager,w as capabilityFlagsFrom,q as componentCapabilities,re as getComponentTemplate,d as getCustomTagFor,I as getInternalComponentManager,V as getInternalHelperManager,E as getInternalModifierManager,v as hasCapability,H as hasDestroyable,P as hasInternalComponentManager,U as hasInternalHelperManager,R as hasInternalModifierManager,C as hasValue,M as helperCapabilities,k as managerHasCapability,X as modifierCapabilities,Z as setComponentManager,oe as setComponentTemplate,p as setCustomTagFor,ee as setHelperManager,$ as setInternalComponentManager,L as setInternalHelperManager,B as setInternalModifierManager,_ as setModifierManager};
++import{debugAssert as e}from"@glimmer/global-context";import{associateDestroyableChild as t,registerDestructor as n}from"@glimmer/destroyable";import{valueForRef as o,createComputeRef as r,createConstRef as a,UNDEFINED_REFERENCE as i}from"@glimmer/reference";import{track as l,createUpdatableTag as u,untrack as s}from"@glimmer/validator";import{InternalComponentCapabilities as c}from"@glimmer/vm";const f=new WeakMap;function d(e){return f.get(e)}function p(e,t){f.set(e,t)}function g(e){if("symbol"==typeof e)return null;const t=Number(e);return isNaN(t)?null:t%1==0?t:null}class m{constructor(e){this.named=e}get(e,t){const n=this.named[t];if(void 0!==n)return o(n)}has(e,t){return t in this.named}ownKeys(){return Object.keys(this.named)}isExtensible(){return!1}getOwnPropertyDescriptor(e,t){return{enumerable:!0,configurable:!0}}}class h{constructor(e){this.positional=e}get(e,t){let{positional:n}=this;if("length"===t)return n.length;const r=g(t);return null!==r&&r<n.length?o(n[r]):e[t]}isExtensible(){return!1}has(e,t){const n=g(t);return null!==n&&n<this.positional.length}}const y=e=>{const{named:t,positional:n}=e,r=new m(t),a=new h(n),i=Object.create(null),u=new Proxy(i,r),s=new Proxy([],a);return p(u,((e,n)=>function(e,t){return l((()=>{t in e&&o(e[t])}))}(t,n))),p(s,((e,t)=>function(e,t){return l((()=>{"[]"===t&&e.forEach(o);const n=g(t);null!==n&&n<e.length&&o(e[n])}))}(n,t))),{named:u,positional:s}},b=c.Empty;function w(e){return b|D(e,"dynamicLayout")|D(e,"dynamicTag")|D(e,"prepareArgs")|D(e,"createArgs")|D(e,"attributeHook")|D(e,"elementHook")|D(e,"dynamicScope")|D(e,"createCaller")|D(e,"updateHook")|D(e,"createInstance")|D(e,"wrapped")|D(e,"willDestroy")|D(e,"hasSubOwner")}function D(e,t){return e[t]?c[t]:b}function k(e,t,n){return!!(t&n)}function v(e,t){return!!(e&t)}function M(t,n={}){return e("3.23"===t,(()=>`Invalid helper manager compatibility specified; you specified ${t}, but only '3.23' is supported.`)),{hasValue:Boolean(n.hasValue),hasDestroyable:Boolean(n.hasDestroyable),hasScheduledEffect:Boolean(n.hasScheduledEffect)}}function C(e){return e.capabilities.hasValue}function H(e){return e.capabilities.hasDestroyable}class A{constructor(e){this.factory=e,this.helperManagerDelegates=new WeakMap,this.undefinedDelegate=null}getDelegateForOwner(e){let t=this.helperManagerDelegates.get(e);if(void 0===t){let{factory:n}=this;t=n(e),this.helperManagerDelegates.set(e,t)}return t}getDelegateFor(e){if(void 0===e){let{undefinedDelegate:e}=this;if(null===e){let{factory:t}=this;this.undefinedDelegate=e=t(void 0)}return e}return this.getDelegateForOwner(e)}getHelper(e){return(n,o)=>{let l=this.getDelegateFor(o);const u=y(n),s=l.createHelper(e,u);if(C(l)){let e=r((()=>l.getValue(s)),null,!1);return H(l)&&t(e,l.getDestroyable(s)),e}if(H(l)){let e=a(void 0,!1);return t(e,l.getDestroyable(s)),e}return i}}}class O{createHelper(e,t){return{fn:e,args:t}}getValue({fn:e,args:t}){return Object.keys(t.named).length>0?e(...t.positional,t.named):e(...t.positional)}getDebugName(e){return e.name?`(helper function ${e.name})`:"(anonymous helper function)"}constructor(){this.capabilities={hasValue:!0,hasDestroyable:!1,hasScheduledEffect:!1}}}const j=new WeakMap,S=new WeakMap,T=new WeakMap,F=Object.getPrototypeOf;function W(e,t,n){return e.set(n,t),n}function x(e,t){let n=t;for(;null!==n;){const t=e.get(n);if(void 0!==t)return t;n=F(n)}}function B(e,t){return W(S,e,t)}function E(e){const t=x(S,e);return void 0===t?null:t}function L(e,t){return W(T,e,t)}const N=new A((()=>new O));function V(t){e("object"==typeof t&&null!==t||"function"==typeof t,(()=>`Attempted to use a value as a helper, but it was not an object or function. Helper definitions must be objects or functions with an associated helper manager. The value was: ${t}`));let n=x(T,t);return void 0===n&&"function"==typeof t&&(n=N),n||null}function $(e,t){return W(j,e,t)}function I(t,n){e("object"==typeof t&&null!==t||"function"==typeof t,(()=>`Attempted to use a value as a component, but it was not an object or function. Component definitions must be objects or functions with an associated component manager. The value was: ${t}`));const o=x(j,t);return void 0===o?(e(n,(()=>`Attempted to load a component, but there wasn't a component manager associated with the definition. The definition was: ${(void 0)(t)}`)),null):o}function P(e){return void 0!==x(j,e)}function U(e){return function(e){return"function"==typeof e}(e)||void 0!==x(T,e)}function R(e){return void 0!==x(S,e)}const K={dynamicLayout:!1,dynamicTag:!1,prepareArgs:!1,createArgs:!0,attributeHook:!1,elementHook:!1,createCaller:!1,dynamicScope:!0,updateHook:!0,createInstance:!0,wrapped:!1,willDestroy:!1,hasSubOwner:!1};function q(e,t={}){let n=Boolean(t.updateHook);return{asyncLifeCycleCallbacks:Boolean(t.asyncLifecycleCallbacks),destructor:Boolean(t.destructor),updateHook:n}}function z(e){return e.capabilities.asyncLifeCycleCallbacks}function G(e){return e.capabilities.updateHook}class J{constructor(e){this.factory=e,this.componentManagerDelegates=new WeakMap}getDelegateFor(e){let{componentManagerDelegates:t}=this,n=t.get(e);if(void 0===n){let{factory:o}=this;n=o(e),t.set(e,n)}return n}create(e,t,n){let o=this.getDelegateFor(e),r=y(n.capture()),a=o.createComponent(t,r,n.stack);return new Q(a,o,r,n.stack)}getDebugName(e){return"function"==typeof e?e.name:e.toString()}update(e){let{delegate:t}=e;if(G(t)){let{component:n,args:o}=e;t.updateComponent(n,o)}}didCreate({component:e,delegate:t}){z(t)&&t.didCreateComponent(e)}didUpdate({component:e,delegate:t}){(function(e){return z(e)&&G(e)})(t)&&t.didUpdateComponent(e)}didRenderLayout(){}didUpdateLayout(){}getSelf({component:e,delegate:t}){return a(t.getContext(e),"this")}getDestroyable(e){const{delegate:t}=e;if(function(e){return e.capabilities.destructor}(t)){const{component:o}=e;return n(e,(()=>t.destroyComponent(o))),e}return null}getCapabilities(){return K}}class Q{constructor(e,t,n){this.component=e,this.delegate=t,this.args=n}}function X(t,n={}){return e("3.22"===t,(()=>`Invalid modifier manager compatibility specified; you specified ${t}, but only '3.22' is supported.`)),{disableAutoTracking:Boolean(n.disableAutoTracking)}}class Y{constructor(e){this.factory=e,this.componentManagerDelegates=new WeakMap}getDelegateFor(e){let{componentManagerDelegates:t}=this,n=t.get(e);if(void 0===n){let{factory:o}=this;n=o(e),t.set(e,n)}return n}create(e,t,o,r){let a,i=this.getDelegateFor(e),l=y(r),s=i.createModifier(o,l);return a={tag:u(),element:t,delegate:i,args:l,modifier:s},n(a,(()=>i.destroyModifier(s,l))),a}getDebugName(e){return"function"==typeof e?e.name||e.toString():"<unknown>"}getDebugInstance({modifier:e}){return e}getTag({tag:e}){return e}install({element:e,args:t,modifier:n,delegate:o}){let{capabilities:r}=o;r.disableAutoTracking?s((()=>o.installModifier(n,e,t))):o.installModifier(n,e,t)}update({args:e,modifier:t,delegate:n}){let{capabilities:o}=n;o.disableAutoTracking?s((()=>n.updateModifier(t,e))):n.updateModifier(t,e)}getDestroyable(e){return e}}function Z(e,t){return $(new J(e),t)}function _(e,t){return B(new Y(e),t)}function ee(e,t){return L(new A(e),t)}const te=new WeakMap,ne=Reflect.getPrototypeOf;function oe(e,t){return te.set(t,e),t}function re(e){let t=e;for(;null!==t;){let e=te.get(t);if(void 0!==e)return e;t=ne(t)}}export{J as CustomComponentManager,A as CustomHelperManager,Y as CustomModifierManager,w as capabilityFlagsFrom,q as componentCapabilities,re as getComponentTemplate,d as getCustomTagFor,I as getInternalComponentManager,V as getInternalHelperManager,E as getInternalModifierManager,v as hasCapability,H as hasDestroyable,P as hasInternalComponentManager,U as hasInternalHelperManager,R as hasInternalModifierManager,C as hasValue,M as helperCapabilities,k as managerHasCapability,X as modifierCapabilities,Z as setComponentManager,oe as setComponentTemplate,p as setCustomTagFor,ee as setHelperManager,$ as setInternalComponentManager,L as setInternalHelperManager,B as setInternalModifierManager,_ as setModifierManager};
+ //# sourceMappingURL=index.js.map
