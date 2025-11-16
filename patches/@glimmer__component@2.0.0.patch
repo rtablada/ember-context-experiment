@@ -1,8 +1,16 @@
 diff --git a/dist/index.js b/dist/index.js
-index ff3962713fed47731dd3a6cda41739163535b426..5e44d2e3a41fd7012471b79c3c6f3825767ff8db 100644
+index ff3962713fed47731dd3a6cda41739163535b426..27e3ddc7ac966f36818a49e698dfadb98d8649e5 100644
 --- a/dist/index.js
 +++ b/dist/index.js
-@@ -282,7 +282,7 @@ function scheduledDestroyComponent(component) {
+@@ -249,6 +249,7 @@ let GlimmerComponent$1 = class GlimmerComponent {
+ 
+ class BaseComponentManager {
+   owner;
++  ARGS_SET = ARGS_SET;
+   constructor(owner) {
+     this.owner = owner;
+   }
+@@ -282,7 +283,7 @@ function scheduledDestroyComponent(component) {
   * 1. Properly destroy the component's associated `meta` data structure
   * 2. Schedule destruction using Ember's runloop
   */
