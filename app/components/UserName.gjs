@@ -1,6 +1,7 @@
 import ContextComponent from '../context/context-component';
-import { AppState } from '../templates/application.gjs';
+
 import { on } from '@ember/modifier';
+import { AppState } from '../state/app-state';
 
 export class UserName extends ContextComponent {
   constructor(owner, args, context) {

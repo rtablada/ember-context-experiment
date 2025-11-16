@@ -1,15 +1,8 @@
 import { pageTitle } from 'ember-page-title';
-import { tracked } from '@glimmer/tracking';
 import ContextComponent, { ProvideContext } from '../context/context-component';
 import { UserName } from '../components/UserName.gjs';
-
-export class AppState {
-  @tracked userName;
-
-  constructor() {
-    this.userName = 'Guest';
-  }
-}
+import { AppState } from '../state/app-state';
+import { Footer } from '../components/Footer.gjs';
 
 const myAppState = new AppState();
 
@@ -21,6 +14,6 @@ const myAppState = new AppState();
 
     <UserName />
 
-    <UserName />
+    <Footer />
   </ProvideContext>
 </template>
