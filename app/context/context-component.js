@@ -30,13 +30,7 @@ function getLatestContextFromStack(stack) {
   for (let i = stack.length - 1; i >= 0; i--) {
     const frame = stack[i];
 
-    if (
-      frame &&
-      typeof frame === 'object' &&
-      frame.state &&
-      frame.state.component &&
-      frame.state.component.constructor === ProvideContext
-    ) {
+    if (frame?.state?.component instanceof ProvideContext) {
       let c = new ContextContainer(
         frame.state.component.args.key,
         frame.state.component.args.value,

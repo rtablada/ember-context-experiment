@@ -8,6 +8,27 @@ Ember does not have a public API that allows for context to be created without u
 This makes it hard to reason about for developers who are used to context in other frameworks like Vue or React.
 It also limits some behavior or cross framework interoperability (ie making Radix compatible implementations in Ember).
 
+## What is this repo?
+
+This repo is a minimum viable implementation of context behavior in Ember.
+It has two small patches to `ember-source` and `@glimmer/component` to that make the following changes to allow public API for better context experimentation:
+
+1. export `EmberGlimmerComponentManager` from `@glimmer/component` this way the component manager can be extended to pass in context
+2. change `InternalManager.create` to pass in the parent stack to `Manager.createComponent` this way the parent component instance crawl the stack to find the latest ContextProvider in the stack
+
+## How this works
+
+This implementation creates a new base component that takes `ContextContainer` as a third argument in the constructor.
+This `ContextContainer` has a method `getContext<T>(key: ContextKey<T>): T` that allows for getting context by key.
+There is also a `ProvideContext` component that allows for providing context to descendants.
+
+### Surprises when working through things
+
+I originally thought that the context container would need to be a complex set of WeakMaps to allow key storage, but in reality in this implmentation the context container knows if the key lookup is for the current provider, if not delegate to the next context container up the stack.
+
+When traversing the stack I check to see if `frame.state.component` is an instance of `ProvideContext`.
+I traverse the stack in reverse to find the closeset path provider first.
+
 ## Issues with other current implementations
 
 `ember-provide-consume-context` allows for a context like behavior but has 3 major issues:
