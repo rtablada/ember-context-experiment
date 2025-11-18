@@ -26,15 +26,15 @@ class ContextContainer {
   }
 }
 
-function getLatestContextFromStack(stack) {
-  for (let i = stack.length - 1; i >= 0; i--) {
-    const frame = stack[i];
+function getLatestContextFromStack(components) {
+  for (let i = components.length - 1; i >= 0; i--) {
+    const component = components[i];
 
-    if (frame?.state?.component instanceof ProvideContext) {
+    if (component instanceof ProvideContext) {
       let c = new ContextContainer(
-        frame.state.component.args.key,
-        frame.state.component.args.value,
-        frame.state.component[CONTEXT_KEY]
+        component.args.key,
+        component.args.value,
+        component[CONTEXT_KEY]
       );
 
       return c;
@@ -46,7 +46,7 @@ function getLatestContextFromStack(stack) {
 
 class ContextComponentManager extends EmberGlimmerComponentManager {
   createComponent(ComponentClass, args, stack) {
-    const context = getLatestContextFromStack(stack.stack);
+    const context = getLatestContextFromStack(stack);
 
     // This is debug internal and can't be registered...
     this.ARGS_SET.set(args.named, true);

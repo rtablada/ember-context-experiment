@@ -4,20 +4,13 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@glimmer/manager': 0.94.10
-  '@glimmer/component': 2.0.0
-
 patchedDependencies:
-  '@glimmer/component@2.0.0':
-    hash: 2wupgy4ymmnzkvraqplvucsm5q
-    path: patches/@glimmer__component@2.0.0.patch
-  '@glimmer/manager@0.94.10':
-    hash: z2zxlcynma7us5fwea4rc3l6bi
-    path: patches/@glimmer__manager@0.94.10.patch
-  ember-source@6.8.1:
-    hash: maxpxsxjahhh4bvccxxmac3u2u
-    path: patches/ember-source@6.8.1.patch
+  '@glimmer/component':
+    hash: c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950
+    path: patches/@glimmer__component.patch
+  ember-source:
+    hash: 5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90
+    path: patches/ember-source.patch
 
 importers:
 
@@ -72,8 +65,8 @@ importers:
         specifier: ^9.37.0
         version: 9.39.1
       '@glimmer/component':
-        specifier: 2.0.0
-        version: 2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q)
+        specifier: ^2.0.0
+        version: 2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950)
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.1.0(@babel/core@7.28.5)(rollup@4.53.2)
@@ -100,13 +93,13 @@ importers:
         version: 8.2.0(@babel/core@7.28.5)
       ember-cli-deprecation-workflow:
         specifier: ^3.4.0
-        version: 3.4.0(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5))
+        version: 3.4.0(ember-source@6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5))
       ember-data:
         specifier: ~5.6.0
         version: 5.6.0(@ember/test-helpers@5.4.1(@babel/core@7.28.5))(@ember/test-waiters@4.1.1)(qunit@2.24.2)
       ember-load-initializers:
         specifier: ^3.0.1
-        version: 3.0.1(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5))
+        version: 3.0.1(ember-source@6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5))
       ember-modifier:
         specifier: ^4.2.2
         version: 4.2.2(@babel/core@7.28.5)
@@ -121,7 +114,7 @@ importers:
         version: 13.1.1
       ember-source:
         specifier: ~6.8.0
-        version: 6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5)
+        version: 6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5)
       ember-template-lint:
         specifier: ^7.9.3
         version: 7.9.3
@@ -747,14 +740,11 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@cacheable/memoize@2.0.3':
-    resolution: {integrity: sha512-hl9wfQgpiydhQEIv7fkjEzTGE+tcosCXLKFDO707wYJ/78FVOlowb36djex5GdbSyeHnG62pomYLMuV/OT8Pbw==}
+  '@cacheable/memory@2.0.5':
+    resolution: {integrity: sha512-fkiAxCvssEyJZ5fxX4tcdZFRmW9JehSTGvvqmXn6rTzG5cH6V/3C4ad8yb01vOjp2xBydHkHrgpW0qeGtzt6VQ==}
 
-  '@cacheable/memory@2.0.4':
-    resolution: {integrity: sha512-cCmJKCKlT1t7hNBI1+gFCwmKFd9I4pS3zqBeNGXTSODnpa0EeDmORHY8oEMTuozfdg3cgsVh8ojLaPYb6eC7Cg==}
-
-  '@cacheable/utils@2.2.0':
-    resolution: {integrity: sha512-7xaQayO3msdVcxXLYcLU5wDqJBNdQcPPPHr6mdTEIQI7N7TbtSVVTpWOTfjyhg0L6AQwQdq7miKdWtTDBoBldQ==}
+  '@cacheable/utils@2.3.1':
+    resolution: {integrity: sha512-38NJXjIr4W1Sghun8ju+uYWD8h2c61B4dKwfnQHVDFpAJ9oS28RpfqZQJ6Dgd3RceGkILDY9YT+72HJR3LoeSQ==}
 
   '@cnakazawa/watch@1.0.4':
     resolution: {integrity: sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ==}
@@ -1520,8 +1510,8 @@ packages:
   '@types/symlink-or-copy@1.2.2':
     resolution: {integrity: sha512-MQ1AnmTLOncwEf9IVU+B2e4Hchrku5N67NkgcAHW0p3sdzPe0FNMANxEm6OJUzPniEQGkeT3OROLlCwZJLWFZA==}
 
-  '@typescript-eslint/tsconfig-utils@8.46.4':
-    resolution: {integrity: sha512-+/XqaZPIAk6Cjg7NWgSGe27X4zMGqrFqZ8atJsX3CWxH/jACqWnrWI68h7nHQld0y+k9eTTjb9r+KU4twLoo9A==}
+  '@typescript-eslint/tsconfig-utils@8.47.0':
+    resolution: {integrity: sha512-ybUAvjy4ZCL11uryalkKxuT3w3sXJAuWhOoGS3T/Wu+iUu1tGJmk5ytSY8gbdACNARmcYEB0COksD2j6hfGK2g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       typescript: '>=4.8.4 <6.0.0'
@@ -1921,8 +1911,8 @@ packages:
     resolution: {integrity: sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg==}
     engines: {node: '>=0.10.0'}
 
-  baseline-browser-mapping@2.8.28:
-    resolution: {integrity: sha512-gYjt7OIqdM0PcttNYP2aVrr2G0bMALkBaoehD4BuRGjAOtipg0b6wHg1yNL+s5zSnLZZrGHOw4IrND8CD+3oIQ==}
+  baseline-browser-mapping@2.8.29:
+    resolution: {integrity: sha512-sXdt2elaVnhpDNRDz+1BDx1JQoJRuNk7oVlAlbGiFkLikHCAQiccexF/9e91zVi6RCgqspl04aP+6Cnl9zRLrA==}
     hasBin: true
 
   basic-auth@2.0.1:
@@ -2110,8 +2100,8 @@ packages:
     resolution: {integrity: sha512-AKcdTnFSWATd5/GCPRxr2ChwIJ85CeyrEyjRHlKxQ56d4XJMGym0uAiKn0xbLOGOl3+yRpOTi484dVCEc5AUzQ==}
     engines: {node: '>=0.10.0'}
 
-  cacheable@2.1.1:
-    resolution: {integrity: sha512-LmF4AXiSNdiRbI2UjH8pAp9NIXxeQsTotpEaegPiDcnN0YPygDJDV3l/Urc0mL72JWdATEorKqIHEx55nDlONg==}
+  cacheable@2.2.0:
+    resolution: {integrity: sha512-LEJxRqfeomiiRd2t0uON6hxAtgOoWDfY3fugebbz+J3vDLO+SkdfFChQcOHTZhj9SYa9iwE9MGYNX72dKiOE4w==}
 
   calculate-cache-key-for-tree@2.0.0:
     resolution: {integrity: sha512-Quw8a6y8CPmRd6eU+mwypktYCwUcf8yVFIRbNZ6tPQEckX9yd+EBVEPC/GSZZrMWH9e7Vz4pT7XhpmyApRByLQ==}
@@ -2137,8 +2127,8 @@ packages:
     resolution: {integrity: sha512-RbsNrFyhwkx+6psk/0fK/Q9orOUr9VMxohGd8vTa4djf4TGLfblBgUfqZChrZuW0Q+mz2eBPFLusw9Jfukzmhg==}
     hasBin: true
 
-  caniuse-lite@1.0.30001754:
-    resolution: {integrity: sha512-x6OeBXueoAceOmotzx3PO4Zpt4rzpeIFsSr6AAePTZxSkXiYDUmpypEl7e2+8NCd9bD7bXjqyef8CJYPC1jfxg==}
+  caniuse-lite@1.0.30001755:
+    resolution: {integrity: sha512-44V+Jm6ctPj7R52Na4TLi3Zri4dWUljJd+RDm+j8LtNCc/ihLCT+X1TzoOAkRETEWqjuLnh9581Tl80FvK7jVA==}
 
   capture-exit@2.0.0:
     resolution: {integrity: sha512-PiT/hQmTonHhl/HFGN+Lx3JJUznrVYJ3+AQsnthneZbvW7x+f08Tk7yLJTLEOUvBTbduLeeBkxEaYXUOUrRq6g==}
@@ -2740,8 +2730,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.253:
-    resolution: {integrity: sha512-O0tpQ/35rrgdiGQ0/OFWhy1itmd9A6TY9uQzlqj3hKSu/aYpe7UIn5d7CU2N9myH6biZiWF3VMZVuup8pw5U9w==}
+  electron-to-chromium@1.5.255:
+    resolution: {integrity: sha512-Z9oIp4HrFF/cZkDPMpz2XSuVpc1THDpT4dlmATFlJUIBVCy9Vap5/rIXsASP1CscBacBqhabwh8vLctqBwEerQ==}
 
   ember-auto-import@2.11.2:
     resolution: {integrity: sha512-eR67ggmPQ6Upx6Smbur0HTRYqQshyxJMKPkWBHwWZmZ8sOA5piR0raL7ccKO0Hrn4ZEkp8ih24yAwvssb6K4NQ==}
@@ -2865,7 +2855,7 @@ packages:
     resolution: {integrity: sha512-yGYa7HiXnJA/D0plnS7yCP/1qXGqMocuXi/iJih/QMSLgq3AEy8I5Qaz5re4HOUtpaMh0ZKmyejTD5tLfzhmvQ==}
     engines: {node: '>= 18.*'}
     peerDependencies:
-      '@glimmer/component': 2.0.0
+      '@glimmer/component': '>= 1.1.2'
 
   ember-template-lint@7.9.3:
     resolution: {integrity: sha512-iqC4rv/oVlXViGuf7hlOA/bC550ZqacZKAc8WvQV0ueeCtIYPkYYK+Tc7FwpM8qGx3jiwu/ZsTuNfPInI5pL7Q==}
@@ -3302,8 +3292,8 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
-  flat-cache@6.1.18:
-    resolution: {integrity: sha512-JUPnFgHMuAVmLmoH9/zoZ6RHOt5n9NlUw/sDXsTbROJ2SFoS2DS4s+swAV6UTeTbGH/CAsZIE6M8TaG/3jVxgQ==}
+  flat-cache@6.1.19:
+    resolution: {integrity: sha512-l/K33newPTZMTGAnnzaiqSl6NnH7Namh8jBNjrgjprWxGmZUuxx/sJNIRaijOh3n7q7ESbhNZC+pvVZMFdeU4A==}
 
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
@@ -3325,8 +3315,8 @@ packages:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
     engines: {node: '>=0.10.0'}
 
-  form-data@4.0.4:
-    resolution: {integrity: sha512-KrGhL9Q4zjj0kiUt5OO4Mr/A/jlI2jDYs5eHBpYHPcBEVSiipAvn2Ko2HnPe20rmcuuvMHNdZFp+4IlGTMF0Ow==}
+  form-data@4.0.5:
+    resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
     engines: {node: '>= 6'}
 
   forwarded@0.2.0:
@@ -6778,19 +6768,16 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@cacheable/memoize@2.0.3':
+  '@cacheable/memory@2.0.5':
     dependencies:
-      '@cacheable/utils': 2.2.0
-
-  '@cacheable/memory@2.0.4':
-    dependencies:
-      '@cacheable/utils': 2.2.0
+      '@cacheable/utils': 2.3.1
       '@keyv/bigmap': 1.2.0(keyv@5.5.4)
       hookified: 1.13.0
       keyv: 5.5.4
 
-  '@cacheable/utils@2.2.0':
+  '@cacheable/utils@2.3.1':
     dependencies:
+      hashery: 1.2.0
       keyv: 5.5.4
 
   '@cnakazawa/watch@1.0.4':
@@ -7358,7 +7345,7 @@ snapshots:
       '@glimmer/util': 0.94.8
       '@glimmer/wire-format': 0.94.8
 
-  '@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q)':
+  '@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950)':
     dependencies:
       '@embroider/addon-shim': 1.10.2
       '@glimmer/env': 0.1.7
@@ -7384,7 +7371,7 @@ snapshots:
       '@simple-dom/interface': 1.4.0
       type-fest: 4.41.0
 
-  '@glimmer/manager@0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)':
+  '@glimmer/manager@0.94.10':
     dependencies:
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
@@ -7405,7 +7392,7 @@ snapshots:
     dependencies:
       '@glimmer/encoder': 0.93.8
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
+      '@glimmer/manager': 0.94.10
       '@glimmer/util': 0.94.8
       '@glimmer/vm': 0.94.8
       '@glimmer/wire-format': 0.94.8
@@ -7415,7 +7402,7 @@ snapshots:
   '@glimmer/program@0.94.10':
     dependencies:
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
+      '@glimmer/manager': 0.94.10
       '@glimmer/opcode-compiler': 0.94.10
       '@glimmer/util': 0.94.8
       '@glimmer/vm': 0.94.8
@@ -7433,7 +7420,7 @@ snapshots:
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
+      '@glimmer/manager': 0.94.10
       '@glimmer/owner': 0.93.4
       '@glimmer/program': 0.94.10
       '@glimmer/reference': 0.94.9
@@ -7757,7 +7744,7 @@ snapshots:
 
   '@types/symlink-or-copy@1.2.2': {}
 
-  '@typescript-eslint/tsconfig-utils@8.46.4(typescript@5.9.3)':
+  '@typescript-eslint/tsconfig-utils@8.47.0(typescript@5.9.3)':
     dependencies:
       typescript: 5.9.3
 
@@ -8223,7 +8210,7 @@ snapshots:
       mixin-deep: 1.3.2
       pascalcase: 0.1.1
 
-  baseline-browser-mapping@2.8.28: {}
+  baseline-browser-mapping@2.8.29: {}
 
   basic-auth@2.0.1:
     dependencies:
@@ -8586,9 +8573,9 @@ snapshots:
 
   browserslist@4.28.0:
     dependencies:
-      baseline-browser-mapping: 2.8.28
-      caniuse-lite: 1.0.30001754
-      electron-to-chromium: 1.5.253
+      baseline-browser-mapping: 2.8.29
+      caniuse-lite: 1.0.30001755
+      electron-to-chromium: 1.5.255
       node-releases: 2.0.27
       update-browserslist-db: 1.1.4(browserslist@4.28.0)
 
@@ -8619,11 +8606,10 @@ snapshots:
       union-value: 1.0.1
       unset-value: 1.0.0
 
-  cacheable@2.1.1:
+  cacheable@2.2.0:
     dependencies:
-      '@cacheable/memoize': 2.0.3
-      '@cacheable/memory': 2.0.4
-      '@cacheable/utils': 2.2.0
+      '@cacheable/memory': 2.0.5
+      '@cacheable/utils': 2.3.1
       hookified: 1.13.0
       keyv: 5.5.4
       qified: 0.5.2
@@ -8655,7 +8641,7 @@ snapshots:
     dependencies:
       tmp: 0.0.28
 
-  caniuse-lite@1.0.30001754: {}
+  caniuse-lite@1.0.30001755: {}
 
   capture-exit@2.0.0:
     dependencies:
@@ -9066,7 +9052,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.253: {}
+  electron-to-chromium@1.5.255: {}
 
   ember-auto-import@2.11.2(webpack@5.102.1):
     dependencies:
@@ -9181,11 +9167,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-cli-deprecation-workflow@3.4.0(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5)):
+  ember-cli-deprecation-workflow@3.4.0(ember-source@6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5)):
     dependencies:
       '@babel/core': 7.28.5
       ember-cli-babel: 8.2.0(@babel/core@7.28.5)
-      ember-source: 6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5)
+      ember-source: 6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -9441,7 +9427,7 @@ snapshots:
       '@babel/core': 7.28.5
       '@babel/eslint-parser': 7.28.5(@babel/core@7.28.5)(eslint@9.39.1)
       '@glimmer/syntax': 0.95.0
-      '@typescript-eslint/tsconfig-utils': 8.46.4(typescript@5.9.3)
+      '@typescript-eslint/tsconfig-utils': 8.47.0(typescript@5.9.3)
       content-tag: 2.0.3
       eslint-scope: 7.2.2
       html-tags: 3.3.1
@@ -9451,9 +9437,9 @@ snapshots:
       - eslint
       - typescript
 
-  ember-load-initializers@3.0.1(ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5)):
+  ember-load-initializers@3.0.1(ember-source@6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5)):
     dependencies:
-      ember-source: 6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5)
+      ember-source: 6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5)
 
   ember-modifier@4.2.2(@babel/core@7.28.5):
     dependencies:
@@ -9499,17 +9485,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-source@6.8.1(patch_hash=maxpxsxjahhh4bvccxxmac3u2u)(@glimmer/component@2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q))(rsvp@4.8.5):
+  ember-source@6.8.1(patch_hash=5d9d807cb889d1e6bc4ee48979a94d5d7645f3bbc415edb14c49ed06aeaf3f90)(@glimmer/component@2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950))(rsvp@4.8.5):
     dependencies:
       '@babel/core': 7.28.5
       '@ember/edition-utils': 1.2.0
       '@embroider/addon-shim': 1.10.2
       '@glimmer/compiler': 0.94.11
-      '@glimmer/component': 2.0.0(patch_hash=2wupgy4ymmnzkvraqplvucsm5q)
+      '@glimmer/component': 2.0.0(patch_hash=c616e24b76ee13630fecece015a1733b1073429dde09c694ab8d27ce18d80950)
       '@glimmer/destroyable': 0.94.8
       '@glimmer/global-context': 0.93.4
       '@glimmer/interfaces': 0.94.6
-      '@glimmer/manager': 0.94.10(patch_hash=z2zxlcynma7us5fwea4rc3l6bi)
+      '@glimmer/manager': 0.94.10
       '@glimmer/node': 0.94.10
       '@glimmer/opcode-compiler': 0.94.10
       '@glimmer/owner': 0.93.4
@@ -10064,7 +10050,7 @@ snapshots:
 
   file-entry-cache@10.1.4:
     dependencies:
-      flat-cache: 6.1.18
+      flat-cache: 6.1.19
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -10194,9 +10180,9 @@ snapshots:
       flatted: 3.3.3
       keyv: 4.5.4
 
-  flat-cache@6.1.18:
+  flat-cache@6.1.19:
     dependencies:
-      cacheable: 2.1.1
+      cacheable: 2.2.0
       flatted: 3.3.3
       hookified: 1.13.0
 
@@ -10210,7 +10196,7 @@ snapshots:
 
   for-in@1.0.2: {}
 
-  form-data@4.0.4:
+  form-data@4.0.5:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
@@ -11000,7 +10986,7 @@ snapshots:
       cssstyle: 4.6.0
       data-urls: 5.0.0
       decimal.js: 10.6.0
-      form-data: 4.0.4
+      form-data: 4.0.5
       html-encoding-sniffer: 4.0.0
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6

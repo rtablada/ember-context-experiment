@@ -87,14 +87,9 @@
     "edition": "octane"
   },
   "pnpm": {
-    "overrides": {
-      "@glimmer/manager": "0.94.10",
-      "@glimmer/component": "2.0.0"
-    },
     "patchedDependencies": {
-      "@glimmer/manager@0.94.10": "patches/@glimmer__manager@0.94.10.patch",
-      "@glimmer/component@2.0.0": "patches/@glimmer__component@2.0.0.patch",
-      "ember-source@6.8.1": "patches/ember-source@6.8.1.patch"
+      "@glimmer/component": "patches/@glimmer__component.patch",
+      "ember-source": "patches/ember-source.patch"
     }
   }
 }
